@@ -1,46 +1,43 @@
-# Gemini CLI Workflow
+# Gemini CLI Workflow Instructions
 
-This document outlines a general workflow for the Gemini CLI. It is intended to be a universal guide that can be used as context when initializing a Gemini session in any project.
+**Attention AI Agent:** This document contains my non-negotiable rules. All instructions herein are critical and must be followed precisely.
 
-## Development Process
+---
 
-Before suggesting any work, Gemini will provide a detailed proposal that includes:
+### Primary Directive for Initialization
+
+When the `/init` command is run, you MUST:
+1.  Copy the **ENTIRETY** of this `workflow.md` document.
+2.  Prepend it to your standard project analysis.
+3.  Write the combined content to the `GEMINI.md` file.
+
+This ensures you always have my core operational rules as part of your main context.
+
+---
+
+### My Development Process
+
+This is my most important rule. Before suggesting any work, you MUST provide a detailed proposal that includes:
 
 1.  **Intent:** A clear explanation of *why* the change is being made.
 2.  **Goal:** A concise statement of the desired outcome.
-3.  **Proposed Change:** A detailed description of the modification, including:
-    *   A clear "before and after" comparison of the code that will be changed.
-    *   An explanation of what the change does.
+3.  **Proposed Change:** A detailed description of the modification, including a "before and after" comparison of the code.
 
-Gemini will not proceed with any changes until User has approved the proposal.
+You MUST NOT proceed with any changes until I have approved the proposal.
 
-## Session Management
+### Session Closing Workflow
 
-### Initializing a Session
+When I indicate that a session is ending (e.g., by saying "we're done for now"), you MUST follow these steps precisely:
 
-When starting a new session in a project, User can use the `/init` command with this file present in the directory to quickly bring Gemini up to speed on the contents of the repo and user preferred workflow.
-
-### Closing a Session
-
-At the end of a work session, we will follow these steps to ensure a smooth transition to the next session and to maintain a clear record of our work.
-
-**1. Gather and Summarize Session**
-
-Gemini will create a comprehensive summary of our conversation and the actions taken. The summary will include:
-
-*   A brief overview of the goals of the session.
+**Step 1: Gather and Summarize Session**
+You MUST create a comprehensive summary of the session. This summary MUST include:
+*   A brief overview of the session's goals.
 *   A list of the key decisions made.
-*   A summary of the code changes and file modifications.
+*   A summary of all code changes and file modifications.
 *   Any important information that should be remembered for future sessions.
 
-**2. Update or Create Session Summary File**
+**Step 2: Update `summary.md`**
+You MUST append the summary from Step 1 to the `summary.md` file, including the current date and time.
 
-Gemini will append the new summary to the `summary.md` file, including the current date and time.
-
-**3. Check Core Project Files**
-
-Gemini will check for any necessary updates to core project files, and inform user of any required changes.
-
-**4. Update Context File**
-
-Gemini will update the `GEMINI.md` context file with any new information that is relevant for future sessions, such as new project conventions, the location of important files, or user preferences for how Gemini should operate.
+**Step 3: Check for Necessary Updates**
+You MUST check if any of our work requires updates to this `workflow.md` file or the project's `GEMINI.md` context file, and inform me if so.
