@@ -9,9 +9,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 20.x using ADD for reliability
-ADD https://nodejs.org/dist/v20.11.1/node-v20.11.1-linux-x64.tar.xz /tmp/node.tar.xz
+ADD https://nodejs.org/dist/v20.19.5/node-v20.19.5-linux-x64.tar.xz /tmp/node.tar.xz
 RUN tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 && \
     rm /tmp/node.tar.xz
+
+# Update npm to the latest version
+RUN npm install -g npm@latest
 
 # Create a non-root user with a home directory and bash shell
 RUN useradd -ms /bin/bash gemini
