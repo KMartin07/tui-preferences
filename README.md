@@ -1,8 +1,4 @@
-# TUI Preferences Repository
-
-This repository contains configurations and scripts for managing TUI (Terminal User Interface) preferences.
-
-## Getting Started
+#  Getting Started
 
 To use this repository, follow these steps:
 
