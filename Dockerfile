@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN set -eux && \
     NODE_VERSION=20.11.1 && \
     ARCH=x64 && \
+    cd /tmp && \
     curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" -o node.tar.xz && \
     tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
     rm node.tar.xz
