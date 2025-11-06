@@ -20,7 +20,7 @@ docker run -it --name gemini-dev-container gemini-dev
 
 ### 3. Get API key 
 
-If you aren't able to auth via google link you can get an API key from (https://aistudio.google.com/api-keys)
+If you aren't able to auth via google link you can get an API key from https://aistudio.google.com/api-keys
 
 ```bash
 export GEMINI_API_KEY=
