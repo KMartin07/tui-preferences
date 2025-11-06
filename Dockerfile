@@ -1,18 +1,16 @@
 FROM debian:bullseye-slim
 
-# Install necessary dependencies, including sudo and curl for NodeSource
+# Install necessary dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     vim \
     sudo \
     curl \
+    xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Setup and install Node.js 20.x, explicitly setting the distro
-RUN export NODESOURCE_DEB_REPO=node_20.x && \
-    export NODESOURCE_DEB_DISTRO=bullseye && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs
+# Manually install Node.js 20.x
+RUN curl -fsSL https://nodejs.org/dist/v20.11.1/node-v20.11.1-linux-x64.tar.xz | tar -xJ -C /usr/local --strip-components=1
 
 # Create a non-root user with a home directory and bash shell
 RUN useradd -ms /bin/bash gemini
