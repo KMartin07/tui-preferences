@@ -33,5 +33,5 @@ jobs:
         context: .
         push: true
         tags: |
-          ghcr.io/${{ github.repository_owner }}/gemini-dev:latest
-          ghcr.io/${{ github.repository_owner }}/gemini-dev:${{ github.sha }}
+          ghcr.io/kmartin07/gemini-dev:latest
+          ghcr.io/kmartin07/gemini-dev:${{ github.sha }}
