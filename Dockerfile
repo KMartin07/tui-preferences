@@ -1,21 +1,18 @@
 FROM debian:bullseye-slim
 
-# Install necessary dependencies, including sudo, curl, and gnupg for NodeSource
+# Install necessary dependencies, including sudo and curl for NodeSource
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     vim \
     sudo \
     curl \
-    gnupg \
     && rm -rf /var/lib/apt/lists/*
 
-# Add NodeSource Node.js 20.x repository
-RUN mkdir -p /etc/apt/keyrings
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
+# Setup Node.js 20.x using the official NodeSource script
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 
 # Install Node.js 20.x (includes npm)
-RUN apt-get update && apt-get install -y nodejs
+RUN apt-get install -y nodejs
 
 # Create a non-root user with a home directory and bash shell
 RUN useradd -ms /bin/bash gemini
