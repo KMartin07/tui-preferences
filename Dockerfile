@@ -5,18 +5,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     vim \
     sudo \
-    curl \
     xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Manually install Node.js 20.x in a robust way
-RUN set -eux && \
-    NODE_VERSION=20.11.1 && \
-    ARCH=x64 && \
-    cd /tmp && \
-    curl -fsSL "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${ARCH}.tar.xz" -o node.tar.xz && \
-    tar -xJf node.tar.xz -C /usr/local --strip-components=1 && \
-    rm node.tar.xz
+# Install Node.js 20.x using ADD for reliability
+ADD https://nodejs.org/dist/v20.11.1/node-v20.11.1-linux-x64.tar.xz /tmp/node.tar.xz
+RUN tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 && \
+    rm /tmp/node.tar.xz
 
 # Create a non-root user with a home directory and bash shell
 RUN useradd -ms /bin/bash gemini
