@@ -1,6 +1,19 @@
+ARG NODE_VERSION=20.19.5
+
+# Stage 1: Build for AMD64
+FROM debian:bullseye-slim as node-builder-amd64
+ARG NODE_VERSION
+ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz /tmp/node.tar.xz
+
+# Stage 2: Build for ARM64
+FROM debian:bullseye-slim as node-builder-arm64
+ARG NODE_VERSION
+ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-arm64.tar.xz /tmp/node.tar.xz
+
+# Final stage
 FROM debian:bullseye-slim
 
-# Install necessary dependencies
+# Install necessary dependencies (xz-utils is still needed for tar)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     vim \
@@ -8,8 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Node.js 20.x using ADD for reliability
-ADD https://nodejs.org/dist/v20.19.5/node-v20.19.5-linux-x64.tar.xz /tmp/node.tar.xz
+# Copy Node.js from the appropriate builder stage
+COPY --from=node-builder-${TARGETARCH} /tmp/node-v${NODE_VERSION}-linux-${TARGETARCH}.tar.xz /tmp/node.tar.xz
 RUN tar -xJf /tmp/node.tar.xz -C /usr/local --strip-components=1 && \
     rm /tmp/node.tar.xz
 
