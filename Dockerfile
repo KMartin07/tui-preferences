@@ -8,11 +8,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Setup and install Node.js 20.x using a more robust method
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x -o nodesource_setup.sh && \
-    bash nodesource_setup.sh && \
-    apt-get install -y nodejs && \
-    rm nodesource_setup.sh
+# Setup and install Node.js 20.x, explicitly setting the distro
+RUN export NODESOURCE_DEB_REPO=node_20.x && \
+    export NODESOURCE_DEB_DISTRO=bullseye && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
 # Create a non-root user with a home directory and bash shell
 RUN useradd -ms /bin/bash gemini
