@@ -45,6 +45,7 @@ docker exec -it gemini-dev-container bash
 Obtain a free API key from [https://aistudio.google.com/api-keys](https://aistudio.google.com/api-keys).
 
 Set it as an environment variable:
+(You can run this command in the shell or paste it to the end of your `~/.bashrc` file for persistence)
 
 ```bash
 export GEMINI_API_KEY=<your API key>
