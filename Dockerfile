@@ -18,6 +18,7 @@ FROM debian:bullseye-slim
 
 # Install necessary dependencies (xz-utils is still needed for tar)
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
     git \
     vim \
     sudo \
