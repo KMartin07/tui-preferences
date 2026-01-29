@@ -1,12 +1,12 @@
 ARG NODE_VERSION=20.19.5
 
 # Stage 1: Build for AMD64
-FROM debian:bullseye-slim AS node-builder-amd64
+FROM debian:bookworm-slim AS node-builder-amd64
 ARG NODE_VERSION
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz /tmp/node.tar.xz
 
 # Stage 2: Build for ARM64
-FROM debian:bullseye-slim AS node-builder-arm64
+FROM debian:bookworm-slim AS node-builder-arm64
 ARG NODE_VERSION
 ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-arm64.tar.xz /tmp/node.tar.xz
 
@@ -14,7 +14,7 @@ ADD https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-arm64.t
 FROM node-builder-${TARGETARCH} AS node-builder
 
 # Final stage
-FROM debian:bullseye-slim
+FROM debian:bookworm-slim
 
 # Install necessary dependencies (xz-utils is still needed for tar)
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     sudo \
     xz-utils \
+    libssl3 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy Node.js from the appropriate builder stage
